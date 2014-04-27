@@ -1,0 +1,51 @@
+# Fill in your name, student ID, and email address in this file.
+# If you are working in a team, fill out the information for both team 
+# members.
+
+# SUBMIT THE LAB ONLY ONCE (from only one partner). This file will be
+# automatically parsed in order to give both team members credit for the
+# lab.
+
+# You need to fill in the EXERCISE sections describing your solutions
+# for Tasks 1, 2, and 3, as well as write the corresponding code.
+# If you did one or more extra credit problems, indicate which one in the
+# appropriate section below (remove the # sign first). If you have any other
+# information you'd like us to know, please add it at the end of the file.
+
+# Partner 1
+Name: Stanley Ku
+Student ID: 403576238
+Email: stanleyku@ucla.edu
+
+# Partner 2 (if you're working in a team)
+Name: Valerie Runge
+Student ID: 004355520
+Email: vrunge@ucla.edu
+
+# EXERCISE 1: What method you used to make your peer download and upload
+#    files in parallel?  (~1-3 sentences)
+For each download/upload in the list, the parent process forks a child process to handle the download/upload. The parent process continues and processes the next download/upload. Once download/upload is finished, the child process exists.
+
+# EXERCISE 2A: What conditions did you find and fix that would have
+#    triggered a buffer overrun bug?  (~1-3 sentences each)
+The filename is limited to a certain length, which is already defined by FILENAMESIZ. This ensures that an exceedingly length filename will not overflow the buffer.
+
+# EXERCISE 2B: What other robustness problems did you fix?  (~1-3 sentences
+#    each)
+1) A peer request is restricted to files in the local directory by checking for valid file path. 
+2) Downloads are restricted to a max file size, which is defined by FILESIZ. This ensure that a malicious file will not fill up the hard disk. It is currently set to 32 MB but could be easily increased by changing FILESIZ.
+3) The task buffer size limit has been increased to 64 MB to prevent connection error when connecting to the popular tracker.
+
+# EXERCISE 3: Describe the attacks you implemented for "evil mode".  Why
+#    are they attacks?  (~3-10 sentences each)
+1) In a normal upload, the transfer ends after reaching end of the file. However in evil mode, when reaching the end of file, the pointer is reset back to the beginning of the file so the upload never ends. Evil mode will continuously transfer data to the peer in an attempt to fill peer's entire hard disk.
+2) In normal mode, if an attacker tries to access file outside of the local directory, the request will be denied. In evil mode, it will counterattack the attacker by repeatedly send data (from cat1.jpg) to attacker.
+3) First form of download attack, we attempt to steal a file outside of the local directory. (Currently turned off in code and using second download attack.)
+4) Second form of download attack, we replace the request filename with one that will cause an overflow.
+5) We also implemented a DDOS attack where it will repeatedly ask the tracker for peers who has a file (currently hardcoded to default cat1.jpg) and then start an empty download task with each peer. 
+
+# Extra credit problems
+Extra credit problem: MD5
+The digest/checksum is implemented using the provided MD5 function. The file checksum is calculated after a file download. We also request the checksum from the server. If the requested checksum matches the calculated checksum, then the file is good. Otherwise, if they don’t match, we try again to download from another no the peer list.
+
+# Add any other information you'd like us to know below this line.

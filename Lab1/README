@@ -1,0 +1,9 @@
+Stanley Ku 403576238
+Valerie Runge 004355520
+
+Code compiles and passes all test cases in test-p-bad.sh and test-p-ok.sh
+testextra-bad.sh created to include more test cases, specifically for subshell commands
+
+Debug mode, which outputs program info at certain locations to aid in debugging, can be turned on by defining DEBUG as 1.
+
+Parallelism works at both the individual command tree and the entire command stream level.
