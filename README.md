@@ -9,10 +9,10 @@ The standard POSIX shell executes the code serially: it waits for the command in
 ####Lab 2: Ramdisk
 Write a Linux kernel module that implements a ramdisk, an in-memory block device, that will support the usual read and write operations. One can read and write the ramdisk by reading and writing a file, for instance one named /dev/osprda. The ramdisk will also support a special read/write locking feature, where a process can gain exclusive access to the ramdisk. This, of course, leads to some interesting synchronization issues.
 
-####Lab 3:
+####Lab 3: File System Driver
 Write a file system driver for Linux by implementing the routines that handle free block management, changing file sizes, read/write to the file, reading a directory file, deleting symbolic links, creating files, and conditional symlinks.
 
-####Lab 4: 
+####Lab 4: P2P
 Distributed computing and security via defensive programming in P2P network.
 
 ####Partners:
